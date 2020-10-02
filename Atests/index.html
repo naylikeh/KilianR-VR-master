@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.0.1/dist/aframe-extras.min.js"></script>
+    <script>
+       AFRAME.registerComponent("loaded", {
+         init: function () {
+           var el = this.el;
+           el.addEventListener('model-loaded', () => {
+             console.log(">>>> modele chargé"+el.id);
+           });
+           el.addEventListener('model-error', () => {
+               console.log(">>>> modele erreur");
+                });
+
+
+    }
+  });
+        AFRAME.registerComponent("finished", {
+          init: function () {
+            var el = this.el;
+            el.addEventListener('animation-finished', () => {
+              console.log(">>>> animation terminée");
+          });
+          el.addEventListener('animation-finished', () => {
+            console.log(">>>> loop terminée");
+          });
+       }
+     });
+
+     </script>
+      </head>
+
+  <body>
+
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="sirtaki" src="./sirtaki.glb"></a-asset-item>
+      </a-assets>
+
+      <a-entity id="sirtaki"
+                position="0 0 -5"
+                rotation="0 270 0"
+                scale="0.03 0.03 0.03"
+                gltf-model="#sirtaki"
+                animation-mixer="clip: Animation 1"
+                loaded
+                finished
+                >
+      </a-entity>
+
+      <a-sky color= "#6EBAA7"></a-sky>
+
+    </a-scene>
+
+</body>
+</html>
